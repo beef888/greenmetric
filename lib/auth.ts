@@ -1,5 +1,29 @@
 "use client";
 
+// Assessment and Calculation interfaces
+export interface Assessment {
+  id: string;
+  createdAt: string;
+  updatedAt?: string;
+  overall_score?: number;
+  environmental_score?: number;
+  social_score?: number;
+  governance_score?: number;
+  responses?: Record<string, any>;
+  recommendations?: string[];
+}
+
+export interface Calculation {
+  id: string;
+  createdAt: string;
+  total_emissions?: number;
+  scope1_emissions?: number;
+  scope2_emissions?: number;
+  scope3_emissions?: number;
+  company_info?: Record<string, any>;
+  emission_sources?: Record<string, any>;
+}
+
 // Simple local authentication system
 export interface User {
   id: string;
@@ -139,9 +163,9 @@ export class AuthService {
 
 // Mock data storage for assessments and calculations
 export class DataService {
-  static saveAssessment(assessment: any) {
+  static saveAssessment(assessment: Omit<Assessment, 'id' | 'createdAt' | 'updatedAt'>): Assessment {
     const assessments = this.getAssessments();
-    const newAssessment = {
+    const newAssessment: Assessment = {
       ...assessment,
       id: `assessment-${Date.now()}`,
       createdAt: new Date().toISOString(),
@@ -152,7 +176,7 @@ export class DataService {
     return newAssessment;
   }
 
-  static getAssessments() {
+  static getAssessments(): Assessment[] {
     if (typeof window === 'undefined') return [];
     try {
       const data = localStorage.getItem('greenmetric_assessments');
@@ -162,9 +186,9 @@ export class DataService {
     }
   }
 
-  static saveCalculation(calculation: any) {
+  static saveCalculation(calculation: Omit<Calculation, 'id' | 'createdAt'>): Calculation {
     const calculations = this.getCalculations();
-    const newCalculation = {
+    const newCalculation: Calculation = {
       ...calculation,
       id: `calculation-${Date.now()}`,
       createdAt: new Date().toISOString()
@@ -174,7 +198,7 @@ export class DataService {
     return newCalculation;
   }
 
-  static getCalculations() {
+  static getCalculations(): Calculation[] {
     if (typeof window === 'undefined') return [];
     try {
       const data = localStorage.getItem('greenmetric_calculations');

@@ -31,6 +31,7 @@ import {
   Calculator
 } from "lucide-react";
 import { DataService } from "@/lib/auth";
+import type { Assessment, Calculation } from "@/lib/auth";
 
 export default function AssessmentsPage() {
   // Get user's saved data
@@ -39,7 +40,7 @@ export default function AssessmentsPage() {
 
   // Combine assessments and calculations
   const allAssessments = [
-    ...assessments.map(a => ({
+    ...assessments.map((a: Assessment) => ({
       id: a.id,
       type: "ESG Assessment",
       title: `ESG Assessment - ${new Date(a.createdAt).toLocaleDateString()}`,
@@ -48,7 +49,7 @@ export default function AssessmentsPage() {
       date: new Date(a.createdAt).toLocaleDateString(),
       lastModified: new Date(a.updatedAt || a.createdAt).toLocaleDateString()
     })),
-    ...calculations.map(c => ({
+    ...calculations.map((c: Calculation) => ({
       id: c.id,
       type: "Carbon Calculation",
       title: `Carbon Footprint - ${new Date(c.createdAt).toLocaleDateString()}`,
