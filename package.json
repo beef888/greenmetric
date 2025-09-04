@@ -2,6 +2,18 @@
   "name": "nextjs",
   "version": "0.1.0",
   "private": true,
+  "description": "Malaysia's premier ESG compliance platform for Bursa Malaysia sustainability reporting",
+  "keywords": ["ESG", "sustainability", "Malaysia", "Bursa Malaysia", "carbon calculator", "compliance"],
+  "author": "GreenMetric.my",
+  "license": "MIT",
+  "homepage": "https://greenmetric.my",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/greenmetric-my.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/greenmetric-my/issues"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
